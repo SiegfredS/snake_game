@@ -17,3 +17,7 @@ Sets up the screen and gets the initial snake parameter
 ## Snake.py
 
 The main snake object
+
+## scoreboard.py
+
+Keeps track and displays the score
