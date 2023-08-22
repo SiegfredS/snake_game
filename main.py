@@ -1,6 +1,7 @@
 from setup import MyScreen
 from snake import Snake
 from food import Food
+from scoreboard import Score
 import time
 
 
@@ -10,6 +11,8 @@ snake_params = screen.get_snake_parameters()
 my_screen = screen.screen
 snake = Snake(params=snake_params)
 food = Food()
+score = Score()
+score.update()
 # After all initial setup, update screen
 my_screen.update()
 
@@ -29,9 +32,11 @@ while is_playing:
     if snake.head.distance(food) <= 15:
         food.respawn()
         snake.add_segment()
+        score.add_score()
 
     if snake.has_collided():
         is_playing = False
+        score.reset_scoreboard()
     else:
         pass
 

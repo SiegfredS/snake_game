@@ -12,7 +12,7 @@ class Snake:
         self.speed = speed
         self.move_distance = move_distance
         # We start at (x,y) = (0,0) however for every length of snake we move leftwards by -20
-        self.starting_position =[(-20*x, 0) for x in range(0, self.length)]
+        self.starting_position = [(-10*x, 0) for x in range(0, self.length)]
         self.create_snake()
         self.head = self.segments[0]
 
@@ -31,6 +31,7 @@ class Snake:
         new_segment.penup()
         new_segment.color(self.color)
         new_segment.speed(self.speed)
+        new_segment.shapesize(stretch_len=0.5, stretch_wid=0.5)
         new_segment.goto(self.starting_position[starting_pos_index])
         self.segments.append(new_segment)
 
@@ -38,7 +39,7 @@ class Snake:
         # Starting with the tail to head move to next coordinate
         for i in range(len(self.segments)-1, 0, -1):
             self.segments[i].goto(self.segments[i-1].position())
-        #Head moves forward
+        # Head moves forward
         self.head.forward(self.move_distance)
 
     def snake_up(self):
@@ -65,8 +66,8 @@ class Snake:
         else:
             pass
 
-    def has_collided(self):
-        if self.head.xcor() > 280 or self.head.xcor() < -280 or self.head.ycor() > 280 or self.head.ycor() < -280:
+    def collision_wall(self):
+        if self.head.xcor() > 290 or self.head.xcor() < -290 or self.head.ycor() > 290 or self.head.ycor() < -290:
             return True
         else:
             return False
@@ -76,5 +77,18 @@ class Snake:
         new_segment.penup()
         new_segment.color(self.color)
         new_segment.speed(self.speed)
+        new_segment.shapesize(stretch_len=0.5, stretch_wid=0.5)
         new_segment.goto(self.segments[-1].position())
         self.segments.append(new_segment)
+
+    def collision_self(self):
+        for segment in self.segments[1:]:
+            if self.head.distance(segment) == 0:
+                return True
+        return False
+
+    def has_collided(self):
+        if self.collision_self() is True or self.collision_wall() is True:
+            return True
+        else:
+            return False
