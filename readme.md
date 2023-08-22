@@ -9,3 +9,11 @@ from scratch as a review of OOP concepts
 This specific project gives my own interpretation of
 Angela Yu's Python snake game project using the turtle
 module
+
+## Setup.py
+
+Sets up the screen and gets the initial snake parameter
+
+## Snake.py
+
+The main snake object
