@@ -33,3 +33,35 @@ class Snake:
         new_segment.speed(self.speed)
         new_segment.goto(self.starting_position[starting_pos_index])
         self.segments.append(new_segment)
+
+    def move(self):
+        # Starting with the tail to head move to next coordinate
+        for i in range(len(self.segments)-1, 0, -1):
+            self.segments[i].goto(self.segments[i-1].position())
+        #Head moves forward
+        self.head.forward(self.move_distance)
+
+    def snake_up(self):
+        if self.head.heading() != 270:
+            self.head.setheading(90)
+        else:
+            pass
+
+    def snake_down(self):
+        if self.head.heading() != 90:
+            self.head.setheading(270)
+        else:
+            pass
+
+    def snake_right(self):
+        if self.head.heading() != 180:
+            self.head.setheading(0)
+        else:
+            pass
+
+    def snake_left(self):
+        if self.head.heading() != 0:
+            self.head.setheading(180)
+        else:
+            pass
+
