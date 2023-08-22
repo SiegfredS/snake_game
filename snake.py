@@ -65,3 +65,16 @@ class Snake:
         else:
             pass
 
+    def has_collided(self):
+        if self.head.xcor() > 280 or self.head.xcor() < -280 or self.head.ycor() > 280 or self.head.ycor() < -280:
+            return True
+        else:
+            return False
+
+    def add_segment(self):
+        new_segment = Turtle("square")
+        new_segment.penup()
+        new_segment.color(self.color)
+        new_segment.speed(self.speed)
+        new_segment.goto(self.segments[-1].position())
+        self.segments.append(new_segment)
